@@ -1,13 +1,16 @@
 // JavaScript is the dynamic element to the webpage. The King of styling is CSS, however.
 //we want to still do our main styling in CSS and use JS as a style injector.
+//element target selectors and global variables are always placed at the top of the page
+//the values of those element selectors or new variables come after
+
 var h1 = document.querySelector("h1");
 var button = document.querySelector("button");
 var body = document.body;
-//create a variable for darkModeActive telling us if its on or not
-var darkModeActive = false;
+var ul = document.querySelector("ul");
 var h3 = document.querySelector("h3");
+//below is our value
+var darkModeActive = false;
 var count = 10;
-
 h1.innerText = "JS Next Level";
 
 //step 1: create a toggle between two modes of color
@@ -89,12 +92,13 @@ function toggleDarkMode() {
     }
   });
 }
+
 function countdownTimer() {
   var timer = setInterval(function () {
     //   count++; //adds time
     count--; //reduces time
     h3.innerText = "Count: " + count;
-    console.log("run this");
+    // console.log("run this");
     //check count and if = 0; clear the interval
     if (count === 0) {
       clearInterval(timer);
@@ -104,12 +108,61 @@ function countdownTimer() {
 }
 
 function init() {
-  toggleDarkMode();
-  setHeaderText();
-  countdownTimer();
+  setHeaderText(); //runs  this first and then this functions job is over
+  countdownTimer(); // function runs and ends
+  toggleDarkMode(); //function runs and ends
+
+  // var lis = document.querySelectorAll("li");
+
+  // for (var li of lis) {
+  //   li.addEventListener("click", function (eventObj) {
+  //     console.log(this.innerText); //is a fast way to use a target to get to the scene (element) of the action (event)
+  //     // console.log(eventObj.target.innerText); //-- grabs the innerText from the element on the click event//this is our callBack -- the element that we clicked on -- my target
+  //     // console.log("li clicked");
+  //   });
+  // }
+
+  ul.addEventListener("click", function (eventObj) {
+    console.log(eventObj.target);
+  });
+  //target returns the scene of the
+  //the target property is the element that caused the action (event) -- I must target the element in order to trigger the callback
+  // returns me every li as an object after the loop
+  //events are actions!!!!!!!
+  //events are actions !!!!!! they trigger a callback function
+
+  //how can we use preventDefault and stopPropagation?
+  //
+
+  //   var bubbleDiv = document.querySelector(".bubble");
+  //   bubbleDiv.addEventListener("click", function () {
+  //     console.log("do I still work?");
+  //   });
+
+  //   var link = document.querySelector("#link");
+  //   link.addEventListener("click", function (obj) {
+  //     obj.preventDefault(); //prevents the page from loading when clicked. overrides the default DOM
+
+  //     window.location = "https://github.com"; // relocates  the link from google to github. overrides the link destination
+  //     console.log("wait! Link clicked");
+  //   });
 }
 
+//preventDefault -- stops the DOM override
+//stopPropogation -- stop bubbling
+//propogation -- stop propogation -- override the browser DOM defualt settings
+//this is a page load function. when the page loads there's no delay for this information to be loaded onto our browser
+//short for initialize
 init();
+
+// function myFunc(num, cb) {
+//   cb("something");//cb was given a paramter of str and becomes an argument
+// }
+
+// myFunc(10, function (str) {
+//   console.log(str);
+// }); // by using a parameter we gave this funtion a name
+
 // remember a function within a function is referenced as a callback function
 //setInterval() is a loop of the callback function until we stop it
 //this would be done with a clearInterval() function
